@@ -1,0 +1,523 @@
+
+  -----------------------------------------------------------------------------
+  Report Summary
+  -----------------------------------------------------------------------------
+  Product Info
+    Name    : VC Static Master Shell
+    Version : T-2022.06 -- May 30, 2022
+
+  Report Info
+    Created : Mar 30, 2026  15:01:28
+
+    TopLevelModule: axi4_to_apb4
+
+  -----------------------------------------------------------------------------
+  Management Summary
+  -----------------------------------------------------------------------------
+  Stage             Family      Fatals    Errors  Warnings     Infos    Waived
+  -----             --------  --------  --------  --------  --------  --------
+  LANGUAGE_CHECK    CODING           0         0         0         1         0
+  STRUCTURAL_CHECK  CODING           0         0         0        43         1
+  -----             --------  --------  --------  --------  --------  --------
+  Total                              0         0         0        44         1
+
+
+  -----------------------------------------------------------------------------
+  Tree Summary
+  -----------------------------------------------------------------------------
+  Severity  Stage             Tag                  Count      Waived
+  --------  -----             -------------------  -----  ----------
+  warning   STRUCTURAL_CHECK  STARC05-1.3.1.3          0           1
+  info      LANGUAGE_CHECK    ReportPortInfo-ML        1           0
+  info      STRUCTURAL_CHECK  RegInputOutput-ML       43           0
+  --------  -----             -------------------  -----  ----------
+  Total                                               44           1
+
+
+
+  -----------------------------------------------------------------------------
+  RegInputOutput-ML  (43 infos/0 waived)
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:32
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 29
+  Statement           : input [9:0]PREADY_i,
+  Signal              : PREADY_i[9:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:7
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 67
+  Statement           : output BVALID_o,
+  Signal              : BVALID_o
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:29
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 74
+  Statement           : input [2:0] ARSIZE_i,
+  Signal              : ARSIZE_i[2:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:34
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 72
+  Statement           : input [AW-1:0] ARADDR_i,
+  Signal              : ARADDR_i[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:28
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 71
+  Statement           : input [IW-1:0] ARID_i,
+  Signal              : ARID_i[3:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:26
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 24
+  Statement           : output [AW-1:0] PADDR_o,
+  Signal              : PADDR_o[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:36
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 47
+  Statement           : input [IW-1:0] AWID_i,
+  Signal              : AWID_i[3:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:41
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 59
+  Statement           : input [(DW/8)-1:0] WSTRB_i,
+  Signal              : WSTRB_i[3:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:17
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 49
+  Statement           : input [LW-1:0] AWLEN_i,
+  Signal              : AWLEN_i[3:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:15
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 34
+  Statement           : input [DW-1:0] PRDATA_i_4,
+  Signal              : PRDATA_i_4[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:9
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 77
+  Statement           : input ARVALID_i,
+  Signal              : ARVALID_i
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:16
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 31
+  Statement           : input [DW-1:0] PRDATA_i_1,
+  Signal              : PRDATA_i_1[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:21
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 27
+  Statement           : output [DW-1:0] PWDATA_o,
+  Signal              : PWDATA_o[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:4
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 53
+  Statement           : input AWVALID_i,
+  Signal              : AWVALID_i
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:44
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 51
+  Statement           : input [1:0] AWBURST_i,
+  Signal              : AWBURST_i[1:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:31
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 75
+  Statement           : input [1:0] ARBURST_i,
+  Signal              : ARBURST_i[1:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:38
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 37
+  Statement           : input [DW-1:0] PRDATA_i_7,
+  Signal              : PRDATA_i_7[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:33
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 50
+  Statement           : input [2:0] AWSIZE_i,
+  Signal              : AWSIZE_i[2:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:14
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 48
+  Statement           : input [AW-1:0] AWADDR_i,
+  Signal              : AWADDR_i[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:35
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 36
+  Statement           : input [DW-1:0] PRDATA_i_6,
+  Signal              : PRDATA_i_6[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:5
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 60
+  Statement           : input WVALID_i,
+  Signal              : WVALID_i
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:43
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 32
+  Statement           : input [DW-1:0] PRDATA_i_2,
+  Signal              : PRDATA_i_2[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:13
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 52
+  Statement           : input [2:0] AWPROT_i,
+  Signal              : AWPROT_i[2:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:10
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 84
+  Statement           : output RVALID_o,
+  Signal              : RVALID_o
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:12
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 86
+  Statement           : output RLAST_o );
+  Signal              : RLAST_o
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:27
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 65
+  Statement           : output [IW-1:0] BID_o,
+  Signal              : BID_o[3:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:39
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 30
+  Statement           : input [DW-1:0] PRDATA_i_0,
+  Signal              : PRDATA_i_0[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:19
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 38
+  Statement           : input [DW-1:0] PRDATA_i_8,
+  Signal              : PRDATA_i_8[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:22
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 21
+  Statement           : output [9:0] PSELx_o,
+  Signal              : PSELx_o[9:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:25
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 58
+  Statement           : input [DW-1:0] WDATA_i,
+  Signal              : WDATA_i[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:40
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 33
+  Statement           : input [DW-1:0] PRDATA_i_3,
+  Signal              : PRDATA_i_3[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:20
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 35
+  Statement           : input [DW-1:0] PRDATA_i_5,
+  Signal              : PRDATA_i_5[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:37
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 28
+  Statement           : output [(DW/8)-1:0] PSTRB_o,
+  Signal              : PSTRB_o[3:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:24
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 76
+  Statement           : input [2:0] ARPROT_i,
+  Signal              : ARPROT_i[2:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:18
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 73
+  Statement           : input [LW-1:0] ARLEN_i,
+  Signal              : ARLEN_i[3:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:2
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 23
+  Statement           : output PENABLE_o,
+  Signal              : PENABLE_o
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:42
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 25
+  Statement           : output [2:0] PPROT_o,
+  Signal              : PPROT_o[2:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:30
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 39
+  Statement           : input [DW-1:0] PRDATA_i_9,
+  Signal              : PRDATA_i_9[31:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:23
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 40
+  Statement           : input [9:0]PSLVERR_i,
+  Signal              : PSLVERR_i[9:0]
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:8
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 68
+  Statement           : input BREADY_i,
+  Signal              : BREADY_i
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:11
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 85
+  Statement           : input RREADY_i,
+  Signal              : RREADY_i
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:6
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 62
+  Statement           : input WLAST_i,
+  Signal              : WLAST_i
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+  -----------------------------------------------------------------------------
+  Tag                 : RegInputOutput-ML
+  Description         : Port '[Signal]' is not registered [Hierarchy: '[DesignObjHierarchy]']
+  Violation           : Lint:3
+  Goal                : lint_rtl
+  FileName            : ../rtl/../rtl/axi4_to_apb4_top.v
+  LineNumber          : 26
+  Statement           : output PWRITE_o,
+  Signal              : PWRITE_o
+  Module              : axi4_to_apb4
+  DesignObjHierarchy  : axi4_to_apb4
+
+  -----------------------------------------------------------------------------
+  ReportPortInfo-ML  (1 info/0 waived)
+  -----------------------------------------------------------------------------
+  Tag           : ReportPortInfo-ML
+  Description   : Port Information for top design unit has been generated. For details see report ReportPortInfo.rpt
+  Violation     : Lint:45
+  Goal          : lint_rtl
+  FileName      : /home1/BRN49/CThennarasu/axi_apb/lint/vcst_rtdb/spyglass/vc_lint0/axi4_to_apb4/VC_GOAL0/spyglass_reports/morelint/ReportPortInfo
+  LineNumber    : 1
+  Statement     : #     Comment          : Report Top Level Module Port Info
