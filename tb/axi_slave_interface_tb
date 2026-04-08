@@ -1,0 +1,217 @@
+module axi4_slave_interface_tb #(
+ parameter AW = 32,
+ parameter DW = 32,
+ parameter IW = 4,
+ parameter LW = 4
+ );
+
+reg ACLK;
+reg ARESETn;
+
+//Declaration of Write Address Channel Signals
+reg [IW-1:0] AWID;
+reg [AW-1:0] AWADDR;
+reg [LW-1:0] AWLEN;
+reg [2:0] AWSIZE;
+reg [1:0] AWBURST;
+reg [2:0] AWPROT;
+reg AWVALID;
+wire AWREADY;
+
+//Declaration of Write DATA Channel Signals
+//input [3:0] WID;
+reg [DW-1:0] WDATA;
+reg [(DW/8)-1:0] WSTRB;
+reg WVALID;
+wire WREADY;
+reg WLAST;
+
+//Declaration of Write RESPONSE Channel Signals
+wire [IW-1:0] BID;
+wire [1:0] BRESP;
+wire BVALID;
+reg BREADY;
+
+//Declaration of Read Address Channel Signals
+reg [IW-1:0] ARID;
+reg [AW-1:0] ARADDR;
+reg [LW-1:0] ARLEN;
+reg [2:0] ARSIZE;
+reg [1:0] ARBURST;
+reg [2:0] ARPROT;
+reg ARVALID;
+wire ARREADY;
+
+//Declaration of Read DATA Channel Signals
+wire [IW-1:0] RID;
+wire [DW-1:0] RDATA;
+wire [1:0] RRESP;
+wire RVALID;
+reg RREADY;
+wire RLAST;
+
+//internal signals 
+wire [AW+IW+LW+7:0] w_addr_ctrl;
+wire w_addr_wen;
+reg w_addr_full;
+wire [(DW/8)+DW:0] w_data_ctrl;
+wire w_data_wen;
+reg w_data_full;
+wire [AW+IW+LW+7:0] r_addr_ctrl;
+wire r_addr_wen;
+reg r_addr_full;
+reg [DW+IW+2:0] r_data_ctrl;
+wire r_data_ren;
+reg r_data_empty;
+reg [1:0] wr_resp_2_axi;
+reg [IW-1:0] wr_bid_2_axi;
+reg mstr_wr_2_axi;
+reg use_mwerr_resp;
+
+initial
+ begin	
+  ACLK = 1'B0;
+  forever
+  #5 ACLK = ~ACLK;
+ end
+
+ axi4_slave_interface rtl(ACLK,ARESETn,AWID,AWADDR,AWLEN,AWSIZE,AWBURST,AWPROT,AWVALID,AWREADY,WDATA,WSTRB,WVALID,WREADY,WLAST,BID,BRESP,BVALID,BREADY,ARID,ARADDR,ARLEN,ARSIZE,ARBURST,ARPROT,ARVALID,ARREADY,RID,RDATA,RRESP,RVALID,RREADY,RLAST,w_addr_ctrl,w_addr_wen,w_addr_full,w_data_ctrl,w_data_wen,w_data_full,r_addr_ctrl,r_addr_wen,r_addr_full,r_data_ctrl,r_data_ren,r_data_empty,wr_resp_2_axi,wr_bid_2_axi,mstr_wr_2_axi,use_mwerr_resp);
+
+ task resetn;
+	 begin
+		 @(negedge ACLK) ARESETn = 1'b0;
+		 @(negedge ACLK) ARESETn = 1'b1;
+          end
+  endtask
+
+  task aw(input [IW-1:0] a,input [AW-1:0] b,input [LW-1:0] c,input [2:0] d,input [1:0] e,input [2:0] f, input g);
+	  begin
+              @(negedge ACLK) ; 
+              AWID = a;
+              AWADDR = b;
+              AWLEN = c;
+              AWSIZE = d;
+              AWBURST = e;
+              AWPROT = f;
+              AWVALID = g;
+	      wait(AWREADY)
+	      @(negedge ACLK) AWVALID = 0;
+          end
+  endtask
+
+  task wd(input [DW-1:0] h,input [(DW/8)-1:0] i,input j,input k);
+	  begin
+              @(negedge ACLK) ; 
+              WDATA = h;
+              WSTRB = i;
+              WLAST = j;
+              WVALID = k;
+	       wait(WREADY)
+	      @(negedge ACLK) WVALID = 0;
+
+          end
+  endtask
+
+  task wr(input z);
+	  begin
+              @(negedge ACLK) ; 
+              BREADY = z;
+          end
+  endtask
+
+
+  task ar(input [IW-1:0] l,input [AW-1:0] m,input [LW-1:0] n,input [2:0] p,input [1:0] q,input [2:0] r, input s);
+	  begin
+              @(negedge ACLK) ; 
+              ARID = l;
+              ARADDR = m;
+              ARLEN = n;
+              ARSIZE = p;
+              ARBURST = q;
+              ARPROT = r;
+              ARVALID = s;
+	       wait(ARREADY)
+	      @(negedge ACLK) ARVALID = 0;
+
+          end
+  endtask
+
+  task rd(input q);
+	  begin
+              @(negedge ACLK) ; 
+              RREADY = q;
+          end
+  endtask
+
+ task is(input  aa,input ab,input ac,input [DW+IW+2:0] ad,input as);
+	  begin
+              @(negedge ACLK) ; 
+             w_addr_full = aa;
+             w_data_full = ab;
+             r_addr_full = ac;
+             r_data_ctrl = ad;
+             r_data_empty = as;
+           end
+  endtask
+
+  task isr(input [1:0] sa,input [IW-1:0] sb,input sc,input ss);
+	  begin
+              @(negedge ACLK) ; 
+             wr_resp_2_axi = sa;
+             wr_bid_2_axi = sb;
+             mstr_wr_2_axi = sc;
+             use_mwerr_resp = ss;
+          end
+  endtask
+
+	integer ia = 0 ;	 
+    
+initial
+      begin
+       resetn;
+       wr_resp_2_axi = 2'b00 ;
+       wr_bid_2_axi = 4'b00;
+       mstr_wr_2_axi = 1'b0;
+       use_mwerr_resp = 1'b0;
+       w_addr_full = 1'b0;
+       w_data_full = 1'b0;
+       r_addr_full = 1'b0;
+       r_data_ctrl = 39'd0;
+       r_data_empty = 1'b0;
+       
+       fork
+          begin	       
+               aw(4'd1,32'h40000100,4'd3,3'd2,2'b00,2'b00,1'b1);
+               wd($random,4'B1111,1'b0,1'b1);
+	       wd($random,4'B1111,1'b0,1'b1);
+	       wd($random,4'B1111,1'b0,1'b1);
+	       wd($random,4'B1111,1'b1,1'b1);
+               wr(1'b1);
+          end
+
+       begin
+                   ar(4'd1,32'h40000100,4'd3,3'd2,2'b00,2'b00, 1'b1);
+		   @(negedge ACLK);
+		   r_data_ctrl  = {1'B0,2'B00,32'h00AB0101,4'b1};
+		   @(negedge ACLK);
+                   r_data_ctrl  = {1'B0,2'B00,32'h01AB0101,4'b1};
+		   @(negedge ACLK);
+		   r_data_ctrl  = {1'B0,2'B00,32'h10AB0101,4'b1};
+		   @(negedge ACLK);
+		   r_data_ctrl  = {1'B1,2'B00,32'h11AB0101,4'b1};
+
+       end
+       join
+
+       @(negedge ACLK);
+       use_mwerr_resp = 1'b1;
+       @(negedge ACLK);
+       wr(1'b0);
+       wr(1'b1);
+
+
+       #100;
+       $finish;
+      end
+endmodule 
+
