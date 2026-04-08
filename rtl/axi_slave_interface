@@ -1,0 +1,234 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 27.03.2026 15:18:41
+// Design Name: 
+// Module Name: axi_slave_interface
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module axi4_slave_interface #(
+ parameter AW = 32,
+ parameter DW = 32,
+ parameter IW = 4,
+ parameter LW = 4
+ )
+ (
+
+input ACLK,
+input ARESETn,
+
+//Declaration of Write Address Channel Signals
+input [IW-1:0] AWID,
+input [AW-1:0] AWADDR,
+input [LW-1:0] AWLEN,
+input [2:0] AWSIZE,
+input [1:0] AWBURST,
+input [2:0] AWPROT,
+input AWVALID,
+output AWREADY,
+
+//Declaration of Write DATA Channel Signals
+//input [3:0] WID;
+input [DW-1:0] WDATA,
+input [(DW/8)-1:0] WSTRB,
+input WVALID,
+output WREADY,
+input WLAST,
+
+//Declaration of Write RESPONSE Channel Signals
+output reg [IW-1:0] BID,
+output reg [1:0] BRESP,
+output BVALID,
+input BREADY,
+
+//Declaration of Read Address Channel Signals
+input [IW-1:0] ARID,
+input [AW-1:0] ARADDR,
+input [LW-1:0] ARLEN,
+input [2:0] ARSIZE,
+input [1:0] ARBURST,
+input [2:0] ARPROT,
+input ARVALID,
+output ARREADY,
+
+//Declaration of Read DATA Channel Signals
+output [IW-1:0] RID,
+output [DW-1:0] RDATA,
+output [1:0] RRESP,
+output RVALID,
+input RREADY,
+output RLAST,
+
+//internal signals 
+output [AW+IW+LW+7:0] w_addr_ctrl,
+output w_addr_wen,
+input w_addr_full,
+output [(DW/8)+DW:0] w_data_ctrl,
+output w_data_wen,
+input w_data_full,
+output [AW+IW+LW+7:0] r_addr_ctrl,
+output r_addr_wen,
+input r_addr_full,
+input [DW+IW+2:0] r_data_ctrl,
+output r_data_ren,
+input r_data_empty,
+input [1:0] wr_resp_2_axi,
+input [IW-1:0] wr_bid_2_axi,
+input mstr_wr_2_axi,
+input use_mwerr_resp
+);
+
+parameter WR_IDLE = 4'B0001;
+parameter WR_IRESP = 4'B0010;
+parameter WR_WRESP = 4'B0100;
+parameter WR_MRESP = 4'B1000;
+parameter RR_IDLE = 2'B01;
+parameter RR_RESP_MC = 2'B10;
+reg [3:0] wr_cstate, wr_nstate;
+reg [1:0] rr_cstate, rr_nstate;
+
+wire wr_resp_2_axi_s;
+reg wr_resp_2_axi_s_d;
+wire mstr_wr_2_axi_s;
+reg w_axi_addr_vld;
+//reg r_axi_addr_vld;
+wire rlast;
+
+
+// WA CHANNEL
+assign w_addr_ctrl = {AWPROT,AWBURST,AWSIZE,AWLEN,AWADDR,AWID};
+assign w_addr_wen = AWVALID & AWREADY;
+
+always @(posedge ACLK or negedge ARESETn)
+ begin
+  if(!ARESETn)
+    w_axi_addr_vld <= 1'b0;
+  else
+    w_axi_addr_vld <= w_addr_wen;
+ end
+ 
+assign AWREADY = ~w_addr_full;
+
+// WD channel
+assign w_data_ctrl = {WLAST,WSTRB,WDATA};
+assign w_data_wen = WVALID & WREADY;
+
+assign WREADY = ~w_data_full;
+
+//logic to generate the BRESP
+always @(posedge ACLK or negedge ARESETn)
+ begin
+  if(!ARESETn)
+    BRESP <= 2'b00;
+  else
+   begin
+    if(wr_cstate == WR_MRESP)
+     BRESP <= wr_resp_2_axi;
+    else
+     BRESP <= BRESP;
+   end
+ end
+ 
+ //logic to generate the BID
+always @(*)
+ begin
+    if(wr_cstate == WR_IRESP)          BID <= AWID;
+    else if (wr_cstate == WR_MRESP)    BID <= wr_bid_2_axi;
+    else                               BID <= 'b0;
+ end
+ 
+ //logic to generate the BVALID
+ assign BVALID = use_mwerr_resp ? ((wr_cstate == WR_WRESP) && mstr_wr_2_axi_s) || ((wr_cstate == WR_MRESP) && mstr_wr_2_axi_s) : (wr_cstate == WR_IRESP);
+ 
+ // Write Response Generation FSM
+ always @(posedge ACLK or negedge ARESETn)
+ begin
+  if(!ARESETn)
+    wr_cstate <= WR_IDLE;
+  else
+    wr_cstate <= wr_nstate;
+ end
+ 
+ always @(*)
+  begin
+   case(wr_cstate)
+    WR_IDLE : if (!use_mwerr_resp && w_axi_addr_vld) wr_nstate = WR_IRESP;
+              else if (use_mwerr_resp) wr_nstate = WR_WRESP;
+              else wr_nstate = WR_IDLE;
+              
+    WR_IRESP : if (BREADY) wr_nstate = WR_IDLE;
+               else wr_nstate = WR_IRESP;
+              
+    WR_WRESP : wr_nstate = WR_MRESP;
+              
+    WR_MRESP : if (BREADY && BVALID) wr_nstate = WR_IDLE;
+               else wr_nstate = WR_MRESP;
+    default : wr_nstate = WR_IDLE;
+   endcase
+  end
+  
+ pulse_sync u_mstr_wr_2_axi (.rstn(ARESETn) , .clk(ACLK), .d(mstr_wr_2_axi), .p(mstr_wr_2_axi_s));
+ 
+  
+// RA CHANNEL
+assign r_addr_ctrl = {ARPROT,ARBURST,ARSIZE,ARLEN,ARADDR,ARID};
+assign r_addr_wen = ARVALID & ARREADY;
+ 
+assign ARREADY = ~r_addr_full;
+assign RID = r_data_ctrl[IW-1:0];
+assign RDATA = r_data_ctrl[(DW+IW)-1:IW];
+assign RRESP = r_data_ctrl[DW+IW+1:DW+IW];
+assign rlast = r_data_ctrl[DW+IW+2];
+assign RVALID = (rr_cstate == RR_RESP_MC)? 1'B1:1'B0;
+assign RLAST = RVALID ? rlast:1'b0;
+
+assign r_data_ren = (rr_cstate == RR_IDLE ) & ~r_data_empty;
+/*
+always @(posedge ACLK or negedge ARESETn)
+ begin
+  if(!ARESETn)
+    r_axi_addr_vld <= 1'b0;
+  else
+    r_axi_addr_vld <= r_addr_wen;
+ end
+*/
+
+ // Read Response FSM
+ always @(posedge ACLK or negedge ARESETn)
+ begin
+  if(!ARESETn)
+    rr_cstate <= RR_IDLE;
+  else
+    rr_cstate <= rr_nstate;
+ end
+ 
+ always @(*)
+  begin
+   case(rr_cstate)
+    RR_IDLE : if (!r_data_empty) rr_nstate = RR_RESP_MC;
+              else rr_nstate = RR_IDLE;
+              
+    RR_RESP_MC : if (RREADY) rr_nstate = RR_IDLE;
+                  else rr_nstate = RR_RESP_MC;
+
+    default : rr_nstate = RR_IDLE;
+   endcase
+  end
+  
+endmodule
+
+
